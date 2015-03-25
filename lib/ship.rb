@@ -1,5 +1,5 @@
 class Ship
-  attr_reader :size, :hits
+  attr_reader :size
   DEFAULT_SHIP_SIZE = 1
 
   def initialize(options)
@@ -10,4 +10,15 @@ class Ship
   def hit
     @hits += 1
   end
+
+  def sunk?
+    @hits >= @size
+  end
+
+  def self.battleship
+    new({size: 4})
+  end
+
+  private
+  attr_reader :hits
 end

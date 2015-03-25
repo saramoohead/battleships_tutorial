@@ -6,8 +6,18 @@ describe Ship do
     expect(ship.size).to eq 2
   end
 
-  it "can be hit" do
+  it "can not be sunk do" do
+    expect(ship).not_to be_sunk
+  end
+
+  it "can be sunk" do
     ship.hit
-    expect(ship.hits).to eq 1
+    ship.hit
+    expect(ship).to be_sunk
+  end
+
+  it "can initialize a battleship" do
+    battleship = Ship.battleship
+    expect(battleship.size).to eq 4
   end
 end
