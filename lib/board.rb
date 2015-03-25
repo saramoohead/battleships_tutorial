@@ -24,4 +24,15 @@ class Board
   def to_letter_in_alphabet number
     (number.ord + 64).chr
   end
+
+  def place(ship, coord)
+    coords_for(ship, coord).each do |coord|
+      grid[coord].content = ship
+
+    end
+  end
+
+  def coords_for size, coord
+    
+  end
 end
