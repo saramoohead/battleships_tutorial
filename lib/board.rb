@@ -1,6 +1,5 @@
 class Board
   DEFAULT_SIZE = 1
-
   attr_reader :grid
 
   def initialize options
@@ -25,6 +24,7 @@ class Board
   end
 
   def place(ship, coord, orientation = :hor)
+    fail 'Ship out of bounds' unless coords_for(ship.size, coord, orientation).all? {|coord| coord_on_board? coord }
     coords_for(ship.size, coord, orientation).each do |coord|
       grid[coord].content = ship
     end
