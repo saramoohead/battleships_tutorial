@@ -24,7 +24,7 @@ class Board
   end
 
   def place(ship, coord, orientation = :hor)
-    fail 'Ship out of bounds' unless coords_for(ship.size, coord, orientation).all? {|coord| coord_on_board? coord }
+    fail 'Ship out of bounds' unless coords_for(ship.size, coord, orientation).all? { |coord| coord_on_board? coord }
     coords_for(ship.size, coord, orientation).each do |coord|
       grid[coord].content = ship
     end
@@ -42,5 +42,9 @@ class Board
 
   def coord_on_board? coord
     grid.keys.include? coord
+  end
+
+  def hit cell
+    grid[cell].content.hit
   end
 end

@@ -50,4 +50,14 @@ describe 'Board' do
   it 'cannot place a ship outside of the board' do
     expect { board.place ship, :A10 }.to raise_error 'Ship out of bounds'
   end
+
+  it 'can hit items on the board' do
+    board.grid[:A1] = second_cell
+    allow(second_cell).to receive(:content).and_return ship
+    expect(ship).to receive(:hit)
+    board.hit(:A1)
+  end
+
+  it "can't hit a cell outside of the boundaries" do
+  end
 end
