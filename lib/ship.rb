@@ -9,6 +9,7 @@ class Ship
 
   def hit
     @hits += 1
+    true
   end
 
   def sunk?
@@ -16,9 +17,10 @@ class Ship
   end
 
   def self.battleship
-    new({size: 4})
+    new(size: 4)
   end
 
   private
+
   attr_reader :hits
 end

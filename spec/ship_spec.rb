@@ -1,22 +1,22 @@
 require 'ship'
 
 describe Ship do
-  let(:ship){ Ship.new({size: 2})}
-  it "can have a size" do
+  let(:ship) { Ship.new(size: 2) }
+  it 'can have a size' do
     expect(ship.size).to eq 2
   end
 
-  it "can not be sunk do" do
+  it 'can not be sunk do' do
     expect(ship).not_to be_sunk
   end
 
-  it "can be sunk" do
+  it 'can be sunk' do
     ship.hit
     ship.hit
     expect(ship).to be_sunk
   end
 
-  it "can initialize a battleship" do
+  it 'can initialize a battleship' do
     battleship = Ship.battleship
     expect(battleship.size).to eq 4
   end
