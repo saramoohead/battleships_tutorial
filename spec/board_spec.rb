@@ -39,4 +39,13 @@ describe 'Board' do
     expect(second_cell).to receive(:content=).with(ship).exactly(2).times
     board.place ship, :A1, :vert
   end
+
+  it 'knows if a coordinate is on the board' do
+    expect(board.coord_on_board?(:A1)).to be true
+  end
+
+  it 'knows if a coordinate is not on the board' do
+    expect(board.coord_on_board?(:A11)).to be false
+    expect(board.coord_on_board?(:K1)).to be false
+  end
 end

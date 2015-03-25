@@ -39,4 +39,8 @@ class Board
   def next_coord coord, orientation
     orientation == :hor ? coord.next : coord.to_s.reverse.next.reverse.to_sym
   end
+
+  def coord_on_board? coord
+    grid.keys.include? coord
+  end
 end
