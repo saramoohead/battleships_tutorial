@@ -1,12 +1,11 @@
 class Board
   DEFAULT_SIZE = 1
-  DEFAULT_CONTENT = String
 
   attr_reader :grid
 
   def initialize options
     size = options.fetch(:size, DEFAULT_SIZE)
-    cell = options.fetch(:cell, DEFAULT_CONTENT)
+    cell = options.fetch(:cell)
     @grid = {}
     letter_range_based_on_size(size).map do |letter|
       (1..dimension_size(size)).map{ |number| @grid["#{ letter }#{ number }".to_sym] = cell.new }
@@ -26,13 +25,14 @@ class Board
   end
 
   def place(ship, coord)
-    coords_for(ship, coord).each do |coord|
+    coords_for(ship.size, coord).each do |coord|
       grid[coord].content = ship
-
     end
   end
 
   def coords_for size, coord
-    
+    coords = [coord]
+    (size - 1).times { coords << coords.last.next }
+    coords
   end
 end
