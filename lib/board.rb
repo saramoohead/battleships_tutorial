@@ -24,15 +24,19 @@ class Board
     (number.ord + 64).chr
   end
 
-  def place(ship, coord)
-    coords_for(ship.size, coord).each do |coord|
+  def place(ship, coord, orientation = :hor)
+    coords_for(ship.size, coord, orientation).each do |coord|
       grid[coord].content = ship
     end
   end
 
-  def coords_for size, coord
+  def coords_for size, coord, orientation
     coords = [coord]
-    (size - 1).times { coords << coords.last.next }
+    (size - 1).times { coords << next_coord(coords.last, orientation) }
     coords
+  end
+
+  def next_coord coord, orientation
+    orientation == :hor ? coord.next : coord.to_s.reverse.next.reverse.to_sym
   end
 end
