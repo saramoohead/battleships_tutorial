@@ -45,6 +45,11 @@ class Board
   def coord_on_board? coord
     grid.keys.include? coord
   end
+  
+  def fill_all_content_with something
+    grid.each do |cell|
+      cell.content = something
+  end
 
   def hit cell
     fail 'Hit out of bounds' unless coord_on_board? cell
@@ -60,5 +65,10 @@ class Board
   end
 
   def ready?
+    ships.count == number_of_pieces
+  end
+  
+  def lost?
+    all_ships_sunk? && ready?
   end
 end

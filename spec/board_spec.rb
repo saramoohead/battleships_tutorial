@@ -9,8 +9,6 @@ describe 'Board' do
   let(:ship) { double :ship, size: 2, sunk?: false }
   let(:small_ship) { double :ship, size: 1, sunk?: true }
 
-  # TODO create ready? method
-
   it 'has 100 cells in the grid' do
     expect(board.grid.count).to eq 100
   end
@@ -86,8 +84,6 @@ describe 'Board' do
   end
 
   it 'knows the board is not ready unless all ships are on it' do
-    # number_of_pieces.times(board.place)
-    # expect(board.placed_all_ships).to be true
     expect(board).not_to be_ready
   end
 
@@ -95,5 +91,11 @@ describe 'Board' do
     board = Board.new({cell: cell_class})
     expect(board).to receive(:ships).and_return [small_ship]
     expect(board).to be_ready
+  end
+  
+  it 'knows when its lost and all ships are sunk' do
+    allow(board).to receive(:ships).and_return [small_ship]
+    allow(board).to receive(:ready?).and_return true
+    expect(board.lost?).to eq true
   end
 end
