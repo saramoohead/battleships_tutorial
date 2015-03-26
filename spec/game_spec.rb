@@ -7,6 +7,7 @@ describe Game do
 
   before do
     allow(player_2).to receive(:register_shot)
+    allow(player_2).to receive(:lost?)
   end
 
   it 'knows who player_1 is' do
@@ -44,4 +45,22 @@ describe Game do
     # expect(game).to receive(:over?).and_return true
     expect(game).not_to be_over
   end
+
+  it 'asks the player if they have lost' do
+    expect(player_2).to receive(:lost?)
+    game.make_move :A1
+  end
+
+  it 'knows if the game is ready' do
+    allow(player_1).to receive(:ready?).and_return true
+    allow(player_2).to receive(:ready?).and_return true
+    expect(game.ready?).to eq true
+  end
+
+  it "knows a game is not ready when player 1 isn't ready" do
+  end
+
+  it "knows a game is not ready when player 2 isn't ready" do
+  end
+
 end

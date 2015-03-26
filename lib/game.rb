@@ -16,7 +16,11 @@ class Game
   end
 
   def over?
-    # true
+    opponent.lost?
+  end
+
+  def ready?
+    true if player_1.ready? && player_2.ready?
   end
 
   private
