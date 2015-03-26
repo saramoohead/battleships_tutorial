@@ -58,9 +58,15 @@ describe Game do
   end
 
   it "knows a game is not ready when player 1 isn't ready" do
+    allow(player_1).to receive(:ready?).and_return false
+    allow(player_2).to receive(:ready?).and_return true
+    expect(game.ready?).to eq false
   end
 
   it "knows a game is not ready when player 2 isn't ready" do
+    allow(player_1).to receive(:ready?).and_return true
+    allow(player_2).to receive(:ready?).and_return false
+    expect(game.ready?).to eq false
   end
 
 end

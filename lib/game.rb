@@ -20,7 +20,8 @@ class Game
   end
 
   def ready?
-    true if player_1.ready? && player_2.ready?
+    return true if player_1.ready? && player_2.ready?
+    false
   end
 
   private
