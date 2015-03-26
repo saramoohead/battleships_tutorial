@@ -17,4 +17,8 @@ class Player
   def lost?
     ready? && board.lost?
   end
+
+  def register_shot cell
+    board.hit cell
+  end
 end

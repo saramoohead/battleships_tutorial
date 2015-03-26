@@ -5,7 +5,7 @@ describe 'Board' do
   let(:cell){ double :first_cell, content: "" }
   let(:second_cell){ double :second_cell }
   let(:cell_class) { double :cell_class, new: cell }
-  let(:board) { Board.new({ size: 100, cell: cell_class })}
+  let(:board) { Board.new({ size: 100, cell: cell_class, number_of_pieces: 5 })}
   let(:ship) { double :ship, size: 2, sunk?: false }
   let(:small_ship) { double :ship, size: 1, sunk?: true }
 
@@ -19,6 +19,10 @@ describe 'Board' do
     board.grid[:A1] = second_cell
     expect(second_cell).to receive(:content=).with small_ship
     board.place small_ship, :A1
+  end
+
+  it 'knows the number of pieces required' do
+    expect(board.number_of_pieces).to eq 5
   end
 
   it 'can place a size 2 ship on the grid' do
@@ -79,5 +83,9 @@ describe 'Board' do
     board.grid[:A1] = second_cell
     allow(second_cell).to receive(:content).and_return ship
     expect(board.ships).to eq [ship]
+  end
+
+  it 'knows the game is ready when 5 ships are on it' do
+    
   end
 end

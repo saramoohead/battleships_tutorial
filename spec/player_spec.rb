@@ -27,11 +27,20 @@ describe Player do
       expect(player.board).to receive(:ready?)
       player.ready?
     end
-  
-    it 'knows if they have lost' do
-      allow(player.board).to receive(:ready?).and_return true
-      expect(player.board).to receive(:lost?)
-      player.lost?
+
+    context 'and board is ready' do
+      before {allow(board).to receive(:ready?).and_return true }
+
+      it 'knows if they have lost' do
+        allow(player.board).to receive(:ready?).and_return true
+        expect(player.board).to receive(:lost?)
+        player.lost?
+      end
+
+      it 'can register a shot' do
+        expect(board).to receive(:hit).with :A1
+        player.register_shot :A1
+      end
     end
   end
 end
