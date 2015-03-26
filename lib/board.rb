@@ -45,6 +45,11 @@ class Board
   end
 
   def hit cell
+    fail 'Hit out of bounds' unless coord_on_board? cell
     grid[cell].content.hit
+  end
+
+  def has_floating_ships?
+
   end
 end

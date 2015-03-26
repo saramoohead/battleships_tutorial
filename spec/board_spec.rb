@@ -2,12 +2,12 @@ require 'board'
 
 describe 'Board' do
 
-  let(:cell){ double :first_cell }
+  let(:cell){ double :first_cell, content: "" }
   let(:second_cell){ double :second_cell }
   let(:cell_class) { double :cell_class, new: cell }
   let(:board) { Board.new({ size: 100, cell: cell_class })}
-  let(:ship) { double :ship, size: 2 }
-  let(:small_ship) { double :ship, size: 1 }
+  let(:ship) { double :ship, size: 2, sunk?: false }
+  let(:small_ship) { double :ship, size: 1, sunk?: true }
 
 
   it 'has 100 cells in the grid' do
@@ -59,5 +59,15 @@ describe 'Board' do
   end
 
   it "can't hit a cell outside of the boundaries" do
+    expect { board.hit(:K11) }.to raise_error 'Hit out of bounds'
+  end
+
+  it "knows if there are floating ships" do
+    board.grid[:A1] = second_cell
+    allow(second_cell).to receive(:content).and_return ship
+    expect(board).to have_floating_ships
+  end
+
+  it 'knows if all ships are sunk' do
   end
 end
