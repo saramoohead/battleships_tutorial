@@ -9,6 +9,7 @@ describe 'Board' do
   let(:ship) { double :ship, size: 2, sunk?: false }
   let(:small_ship) { double :ship, size: 1, sunk?: true }
 
+  # TODO create ready? method
 
   it 'has 100 cells in the grid' do
     expect(board.grid.count).to eq 100

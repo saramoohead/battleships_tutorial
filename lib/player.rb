@@ -9,4 +9,12 @@ class Player
   def has_board?
     !board.nil?
   end
+
+  def ready?
+    has_board? && board.ready?
+  end
+
+  def lost?
+    ready? && board.lost?
+  end
 end
