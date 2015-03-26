@@ -18,16 +18,22 @@ describe Game do
   end
 
   it 'switches turns after each move' do
-    game.make_move #:A1
+    game.make_move :A1
     expect(game.turn).to eq player_2
   end
 
-  it 'doesn\'t switch turns if game is over' do
+  xit 'doesn\'t switch turns if game is over' do
     expect(game).to receive(:over?).and_return true
-    expect { game.make_move }.to raise_error 'Game over'
+    expect { game.make_move :A2 }.to raise_error 'Game over'
   end
 
-  it 'passes the shot to the opponent' do
+  xit 'passes the shot to the opponent' do
+    expect(player_2).to receive(:register_shot).with :A1
+    game.make_move :A1
+  end
 
+  it 'knows who the opponent is' do
+    game.turn = player_2
+    expect(game.opponent).to eq player_1
   end
 end
