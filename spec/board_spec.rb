@@ -2,10 +2,10 @@ require 'board'
 
 describe 'Board' do
 
-  let(:cell){ double :first_cell, content: "" }
-  let(:second_cell){ double :second_cell }
+  let(:cell) { double :first_cell, content: '' }
+  let(:second_cell) { double :second_cell }
   let(:cell_class) { double :cell_class, new: cell }
-  let(:board) { Board.new({ size: 100, cell: cell_class, number_of_pieces: 5 })}
+  let(:board) { Board.new({ size: 100, cell: cell_class, number_of_pieces: 5 }) }
   let(:ship) { double :ship, size: 2, sunk?: false }
   let(:small_ship) { double :ship, size: 1, sunk?: true }
 
@@ -85,7 +85,15 @@ describe 'Board' do
     expect(board.ships).to eq [ship]
   end
 
-  it 'knows the game is ready when 5 ships are on it' do
-    
+  it 'knows the board is not ready unless all ships are on it' do
+    # number_of_pieces.times(board.place)
+    # expect(board.placed_all_ships).to be true
+    expect(board).not_to be_ready
+  end
+
+  it 'knows the board is ready when all ships are placed' do
+    board = Board.new({cell: cell_class})
+    expect(board).to receive(:ships).and_return [small_ship]
+    expect(board).to be_ready
   end
 end

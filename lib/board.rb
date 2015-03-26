@@ -58,4 +58,7 @@ class Board
   def ships
     grid.values.map(&:content).select{|content| content.respond_to? :sunk? }
   end
+
+  def ready?
+  end
 end
