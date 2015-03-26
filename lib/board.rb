@@ -49,7 +49,11 @@ class Board
     grid[cell].content.hit
   end
 
-  def has_floating_ships?
+  def all_ships_sunk?
+    ships.all?(&:sunk?)
+  end
 
+  def ships
+    grid.values.map(&:content).select{|content| content.respond_to? :sunk? }
   end
 end

@@ -65,9 +65,18 @@ describe 'Board' do
   it "knows if there are floating ships" do
     board.grid[:A1] = second_cell
     allow(second_cell).to receive(:content).and_return ship
-    expect(board).to have_floating_ships
+    expect(board.all_ships_sunk?).to eq false
   end
 
-  it 'knows if all ships are sunk' do
+  it 'knows that all ships are sunk' do
+    board.grid[:A1] = second_cell
+    allow(second_cell).to receive(:content).and_return small_ship
+    expect(board.all_ships_sunk?).to eq true
+  end
+
+  it 'knows what ships are on the board' do
+    board.grid[:A1] = second_cell
+    allow(second_cell).to receive(:content).and_return ship
+    expect(board.ships).to eq [ship]
   end
 end
